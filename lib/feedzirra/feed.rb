@@ -235,7 +235,7 @@ module Feedzirra
           end
         end
         
-        curl.on_failure do |c|
+        curl.on_failure do |c,r|
           add_url_to_multi(multi, url_queue.shift, url_queue, responses, options) unless url_queue.empty?
           responses[url] = c.response_code
           options[:on_failure].call(url, c.response_code, c.header_str, c.body_str) if options.has_key?(:on_failure)
